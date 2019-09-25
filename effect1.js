@@ -11,10 +11,35 @@
   seriously = new Seriously();
 
 
+ ////////////////////// ACTION - enter the video URL
+ var videoName =
+   "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
+
+ var video = document.createElement('video');
+ video.src = videoName
+ video.width =  window.innerWidth;
+ video.height = window.innerHeight;
+
+ ///////do not modify
+ var canvas = document.createElement("canvas");
+ canvas.width = window.innerWidth;
+ canvas.height = window.innerHeight;
+ canvas.style.position = "absolute";
+ document.body.scrollTop = 0; // <-- pull the page back up to the top
+ document.body.style.overflow = "hidden";
+ document.body.style.top = 0;
+ document.body.style.left = 0;
+ document.body.style.margin = 0;
+ document.body.style.border = "none";
+ document.body.appendChild(canvas);
+
+
+
+
   ///// ACTION - add effects
 
-  colorbars = seriously.source('#colorbars');
-  target = seriously.target('#canvas');
+  colorbars = seriously.source(video);
+  target = seriously.target(canvas);
   vignette = seriously.effect('vignette');
 
   vignette.amount = '#vignette-range';
