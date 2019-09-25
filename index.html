@@ -11,7 +11,71 @@
 	<script src="lib/effects/seriously.vignette.js"></script>
 	<script src="lib/effects/seriously.hue-saturation.js"></script>
 	<script src="lib/effects/seriously.split.js"></script>
-  <script type="text/javascript" src="effect1.js"></script>
+   
+  <script>
+  
+  
+  ////////////////////////////////Seriously - QCA3642
 
+  //////////////////////do not modify
+  var seriously, // the main object that holds the entire composition
+    sourcevideo, // a wrapper object for our source image
+    vignette, // a vignette effect
+    target; // a wrapper object for our target canvas
+  seriously = new Seriously();
+
+
+ ////////////////////// ACTION - enter the video URL
+ var videoName ="https://cdn.glitch.com/2b1b2c88-1600-485c-86e7-a0a61e86e537%2Fvideo.mp4";
+
+    
+//////////////////////do not modify
+ var video = document.createElement('video');
+ video.width =  window.innerWidth;
+ video.height = window.innerHeight;
+ video.crossOrigin = "anonymous";
+ video.preload = ''
+ video.autoload = true 
+ video.src = videoName 
+ var canvas = document.createElement("canvas");
+ canvas.width = window.innerWidth;
+ canvas.height = window.innerHeight;
+ canvas.style.position = "absolute";
+ document.body.scrollTop = 0; // <-- pull the page back up to the top
+ document.body.style.overflow = "hidden";
+ document.body.style.top = 0;
+ document.body.style.left = 0;
+ document.body.style.margin = 0;
+ document.body.style.border = "none";
+ document.body.appendChild(canvas);
+
+ video.load();
+
+ video.addEventListener('loadeddata', function() {
+    sourcevideo = seriously.source(video);  
+    target = seriously.target(canvas);
+
+   
+    ///// ACTION - add effect chain
+    var effect1 = seriously.effect('vignette');
+    effect1.source = sourcevideo;
+   
+    //var effect2 = seriously.effect('effectname');
+    //effect2.source = effect1;  // chain as last effect
+   
+   
+    target.source = effect1;  // set as last effect in chain 
+  
+   
+   //////////////////////do not modify
+    seriously.go();
+    video.play();
+
+  }, false);
+
+  
+  </script>
+  
+  
 </body>
 </html>
