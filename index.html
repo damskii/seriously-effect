@@ -45,6 +45,16 @@
  video.preload = ''
  video.autoload = true 
  video.src = videoName 
+    
+    
+ ///////  ACTION - video settings
+video.autoplay=true
+video.loop=true
+video.muted=true 
+video.playsinline=true
+    
+      
+  //////////////////////do not modify  
  var canvas = document.createElement("canvas");
  canvas.width = window.innerWidth;
  canvas.height = window.innerHeight;
@@ -58,7 +68,7 @@
  document.body.appendChild(canvas);
 
  video.load();
-
+                                         
  video.addEventListener('loadeddata', function() {
     sourcevideo = seriously.source(video);  
     target = seriously.target(canvas);
@@ -71,8 +81,8 @@
     huesaturation.source = sourcevideo;
    
     /// add hue saturation parameteres
-    // huesaturation.hue = 
-   // huesaturation.saturation = 
+    huesaturation.hue = 1.0 // 0.7
+    huesaturation.saturation = 0 //.9
    
    
    ///// ACTION - add your effects here - atm effectNamePrevious is 'huesaturation'
