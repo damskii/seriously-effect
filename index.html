@@ -3,15 +3,110 @@
 <head><title>Seriously.js - QCA3642 </title></head>
 <body>
 
-	<div>
-		<input type="range" id="vignette-range" min="0" max="20" step="0.0001" value="1"/>
-	</div>
-
 	<script src="lib/seriously.js"></script>
-	<script src="lib/effects/seriously.vignette.js"></script>
+  
 	<script src="lib/effects/seriously.hue-saturation.js"></script>
-	<script src="lib/effects/seriously.split.js"></script>
-  <script type="text/javascript" src="effect1.js"></script>
 
+  <!-- ACTION - add your effect script tags here (see INSTRUCTIONS below) -->
+
+  <!-- <script src="lib/effects/seriously.EFFECTNAME.js"></script>  -->
+  
+  
+  <script>
+  
+  
+  ////////////////////////////////Seriously! - QCA3642 - video effects  -- https://github.com/brianchirls/Seriously.js
+  
+  /// INSTRUCTIONS - ADDING A NEW EFFECT IN THE CHAIN
+    
+  /// Replace EFFECTNAME (everywhere) with the name of the effect from the /lib/effects/ directory
+  /// Replace effectName with a name of the effect eg huesaturation
+  /// Replace effectNamePrevious with the name of the previous effect in your chain eg effect1
+
+  /// Lookup your effect parameters here - https://github.com/brianchirls/Seriously.js/wiki
+  /// eg  effectName.parameter = 1.0
+      
+  //////////////////////do not modify
+  var seriously, // the main object that holds the entire composition
+    sourcevideo, // a wrapper object for our source image
+    target; // a wrapper object for our target canvas
+  seriously = new Seriously();
+
+
+ ///////////////////////////////////////// ACTION - enter the video URL
+ var videoName = "https://cdn.glitch.com/2b1b2c88-1600-485c-86e7-a0a61e86e537%2Fvideo.mp4";
+
+    
+//////////////////////do not modify
+ var video = document.createElement('video');
+ video.width =  window.innerWidth;
+ video.height = window.innerHeight;
+ video.crossOrigin = "anonymous";
+ video.preload = ''
+ video.autoload = true 
+ video.src = videoName 
+    
+    
+ ///////  ACTION - video settings
+video.autoplay=true
+video.loop=true
+video.muted=true 
+video.playsinline=true
+    
+      
+  //////////////////////do not modify  
+ var canvas = document.createElement("canvas");
+ canvas.width = window.innerWidth;
+ canvas.height = window.innerHeight;
+ canvas.style.position = "absolute";
+ document.body.scrollTop = 0; // <-- pull the page back up to the top
+ document.body.style.overflow = "hidden";
+ document.body.style.top = 0;
+ document.body.style.left = 0;
+ document.body.style.margin = 0;
+ document.body.style.border = "none";
+ document.body.appendChild(canvas);
+
+ video.load();
+                                         
+ video.addEventListener('loadeddata', function() {
+    sourcevideo = seriously.source(video);  
+    target = seriously.target(canvas);
+
+   
+    ////////////////////////////////////////////////////// ACTION --- add effect chain
+   /// https://github.com/brianchirls/Seriously.js/wiki/Hue-Saturation-Adjust
+   
+    var huesaturation = seriously.effect('hue-saturation');
+    huesaturation.source = sourcevideo;
+   
+    /// add hue saturation parameteres
+    huesaturation.hue = 1.0 // 0.7
+    huesaturation.saturation = 0 //.9
+   
+   
+   ///// ACTION - add your effects here - atm effectNamePrevious is 'huesaturation'
+   
+    //var effectName = seriously.effect('EFFECTNAME');
+    //effectName.source = effectNamePrevious;  // chain as last effect - is 'huesaturation' atm
+    
+   // effectName.parameter = ??? // enter a value (number,boolean (true/false) or string 'mode')
+   
+   
+   
+    /////////////// ACTION - change 'huesaturation' as the last effectName in your chain
+    target.source = huesaturation;  // set as last effect in chain 
+  
+   
+   //////////////////////do not modify
+    seriously.go();
+    video.play();
+
+  }, false);
+
+  
+  </script>
+  
+  
 </body>
 </html>
